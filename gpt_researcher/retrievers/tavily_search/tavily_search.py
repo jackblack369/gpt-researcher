@@ -50,3 +50,10 @@ class TavilySearch():
             ddg = DDGS()
             search_response = ddg.text(self.query, region='wt-wt', max_results=max_results)
         return search_response
+
+if __name__ == '__main__':
+    # Example usage
+    query = "What is the capital of France?"
+    tavily_search = TavilySearch(query)
+    results = tavily_search.search()
+    print(results)

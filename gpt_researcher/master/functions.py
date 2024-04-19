@@ -98,7 +98,13 @@ async def get_sub_queries(query: str, agent_role_prompt: str, cfg, parent_query:
         temperature=0,
         llm_provider=cfg.llm_provider
     )
-    sub_queries = json.loads(response)
+    # response e.g.:
+    # '["BTC vs ETH price comparison April 17, 2024"]\n["Expert opinions on BTC and ETH performance in New York Stock Exchange"]\n["Historical trends of BTC and ETH market dominance in 2024"]'
+
+    json_arrays = response.split('\n')
+    sub_queries = [json.loads(array.strip()) for array in json_arrays]
+
+    # sub_queries = json.loads(response)
     return sub_queries
 
 

@@ -141,7 +141,7 @@ class GPTResearcher:
                             self.websocket)
 
         # Using asyncio.gather to process the sub_queries asynchronously
-        context = await asyncio.gather(*[self.process_sub_query(sub_query) for sub_query in sub_queries])
+        context = await asyncio.gather(*[self.process_sub_query(''.join(sub_query)) for sub_query in sub_queries])
         return context
 
     async def process_sub_query(self, sub_query: str):
@@ -207,7 +207,7 @@ class GPTResearcher:
         context_compressor = ContextCompressor(
             documents=pages, embeddings=self.memory.get_embeddings())
         # Run Tasks
-        return context_compressor.get_context(query, max_results=8)
+        return context_compressor.get_context(query, max_results=2)
 
     ########################################################################################
 
